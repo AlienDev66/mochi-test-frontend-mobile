@@ -1,6 +1,9 @@
 {
   "expo": {
     "name": "mochi-test-frontend-mobile",
+    "jest": {
+      "verbose": true
+    },
     "slug": "mochi-test-frontend-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -13,16 +16,20 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-xxxxxx"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
+      },
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-xxxxxx"
       }
     },
     "web": {

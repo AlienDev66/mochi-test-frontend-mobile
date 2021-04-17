@@ -32,7 +32,7 @@
       "<rootDir>"
     ],
     "setupFiles": [
-      "./tests/setup.js"
+      "./tests/setup.ts"
     ]
   },
   "dependencies": {
