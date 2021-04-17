@@ -1,12 +1,16 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import React from 'react';
+import renderer from 'react-test-renderer';
 
-import App from "./App";
+import App from '../App';
 
-describe("<App />", () => {
-  it("has 3 child", () => {
+describe('<App />', () => {
     const tree: any = renderer.create(<App />).toJSON();
-    console.log(tree);
-    expect(tree?.children?.length).toBe(3);
-  });
+
+    it('renders correctly', () => {
+        expect(tree).toMatchSnapshot();
+    });
+
+    it('has 3 child', () => {
+        expect(tree?.children?.length).toBe(3);
+    });
 });
