@@ -10,7 +10,7 @@ describe('<App />', () => {
         expect(tree).toMatchSnapshot();
     });
 
-    it('has 3 child', () => {
-        expect(tree?.children?.length).toBe(3);
+    it('has 1 child', () => {
+        expect(tree?.children?.length).toBe(1);
     });
 });
