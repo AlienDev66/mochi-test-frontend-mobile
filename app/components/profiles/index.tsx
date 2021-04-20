@@ -9,14 +9,17 @@ import {
     UserName,
     AvatarUsernameCompleteName,
     Titles,
-    TextContainer
+    TextContainer,
+    NoFound,
+    NumberFound,
+    Message
 } from './styles';
 import { TabView, SceneMap } from 'react-native-tab-view';
 import { ScrollView, Text } from 'react-native';
 import { ProfileListProps } from './profiles.type';
 import { Feather } from '@expo/vector-icons';
 
-const Profiles: React.FC<ProfileListProps> = ({ data, type }) => {
+const Profiles: React.FC<ProfileListProps> = ({ data }) => {
     const FirstRoute = () => listProfiles('User');
 
     const SecondRoute = () => listProfiles('Company');
@@ -35,6 +38,15 @@ const Profiles: React.FC<ProfileListProps> = ({ data, type }) => {
     function listProfiles(type: string) {
         return (
             <>
+                {!data?.users?.length && (
+                    <NoFound>
+                        <NumberFound>0</NumberFound>
+                        <Message>
+                            Humm... We didn't find any{' '}
+                            {type === 'User' ? `users` : 'companies'}...
+                        </Message>
+                    </NoFound>
+                )}
                 <Titles
                     style={{
                         borderBottomWidth: 1,
@@ -76,22 +88,24 @@ const Profiles: React.FC<ProfileListProps> = ({ data, type }) => {
                 </Titles>
 
                 <ScrollView>
-                    <ListContainer
-                        style={{
-                            borderBottomWidth: 1,
-                            borderBottomColor: '#D1D9E2'
-                        }}
-                    >
-                        <AvatarUsernameCompleteName>
-                            <Avatar />
-                            <CompleteAndUsername>
-                                <UserName>johndoe2000</UserName>
-                                <CompleteName>John Doe</CompleteName>
-                            </CompleteAndUsername>
-                        </AvatarUsernameCompleteName>
+                    {data?.users?.map((user, i) => {
+                        <ListContainer
+                            style={{
+                                borderBottomWidth: 1,
+                                borderBottomColor: '#D1D9E2'
+                            }}
+                        >
+                            <AvatarUsernameCompleteName>
+                                <Avatar />
+                                <CompleteAndUsername>
+                                    <UserName>johndoe2000</UserName>
+                                    <CompleteName>John Doe</CompleteName>
+                                </CompleteAndUsername>
+                            </AvatarUsernameCompleteName>
 
-                        <ContribuitionsNumber>0</ContribuitionsNumber>
-                    </ListContainer>
+                            <ContribuitionsNumber>0</ContribuitionsNumber>
+                        </ListContainer>;
+                    })}
                 </ScrollView>
             </>
         );
