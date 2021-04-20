@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { ReactNode } from 'react';
 import InputSearch from '../../components/inputSearch';
-import {} from '../../components/profiles/styles';
 import { Container, SearchInputTitle, SearchInputLabel } from './styles';
 import Profiles from '../../components/profiles';
 
@@ -39,7 +38,7 @@ const FindGithubUsersAndCompanies: React.FC = ({
                     Enter a login, name or a company you are looking for.
                 </InitialText>
             </InitialState> */}
-            <Profiles type="User" />
+            <Profiles />
         </Container>
     );
 };

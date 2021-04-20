@@ -63,3 +63,15 @@ export const TextContainer = styled.View`
     flex-direction: row;
     align-items: center;
 `;
+export const NoFound = styled.View`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+`;
+export const NumberFound = styled.Text`
+    font-size: 90px;
+    color: #d1d9e2;
+`;
+export const Message = styled.Text`
+    font-size: 19px;
+`;

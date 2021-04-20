@@ -12,7 +12,5 @@ export type DataProps = {
 };
 
 export type ProfileListProps = {
-    type: 'User' | 'Organization';
-    style?: string;
     data?: DataProps;
 };
