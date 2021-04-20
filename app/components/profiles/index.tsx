@@ -96,14 +96,18 @@ const Profiles: React.FC<ProfileListProps> = ({ data }) => {
                             }}
                         >
                             <AvatarUsernameCompleteName>
-                                <Avatar />
+                                <Avatar source={user?.avatar_url} />
                                 <CompleteAndUsername>
-                                    <UserName>johndoe2000</UserName>
-                                    <CompleteName>John Doe</CompleteName>
+                                    <UserName>{user?.login}</UserName>
+                                    <CompleteName>
+                                        {user?.name || ' '}
+                                    </CompleteName>
                                 </CompleteAndUsername>
                             </AvatarUsernameCompleteName>
 
-                            <ContribuitionsNumber>0</ContribuitionsNumber>
+                            <ContribuitionsNumber>
+                                {user?.total}
+                            </ContribuitionsNumber>
                         </ListContainer>;
                     })}
                 </ScrollView>
