@@ -1,4 +1,10 @@
-import React, { createContext, useCallback, useMemo, useState } from 'react';
+import React, {
+    createContext,
+    useCallback,
+    useContext,
+    useMemo,
+    useState
+} from 'react';
 import api from '../../services/api';
 import {
     DataProps,
@@ -143,7 +149,7 @@ export const ProfilesProvider: React.FC = ({ children }) => {
 
         []
     );
-    const values = useMemo(
+    const memorizedValues = useMemo(
         () => ({
             githubUsersProfiles,
             dealingSearchUsers,
@@ -163,8 +169,14 @@ export const ProfilesProvider: React.FC = ({ children }) => {
     );
 
     return (
-        <ProfilesContext.Provider value={values}>
+        <ProfilesContext.Provider value={memorizedValues}>
             {children}
         </ProfilesContext.Provider>
     );
+};
+
+export const useProfiles = () => {
+    const context = useContext(ProfilesContext);
+
+    return context;
 };
