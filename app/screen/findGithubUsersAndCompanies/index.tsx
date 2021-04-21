@@ -1,17 +1,10 @@
 import React, { useState } from 'react';
 import { ReactNode } from 'react';
 import InputSearch from '../../components/inputSearch';
-import {
-    Container,
-    SearchInputTitle,
-    SearchInputLabel,
-    InitialState,
-    InitialText
-} from './styles';
+import { Container, SearchInputTitle, SearchInputLabel } from './styles';
 import Profiles from '../../components/profiles';
-import { Text, TouchableOpacity } from 'react-native';
+import { Text } from 'react-native';
 import { useProfiles } from '../../hooks/useProfiles';
-import { Feather } from '@expo/vector-icons';
 
 interface FindGithubUsersAndCompaniesProps {
     children?: ReactNode;
