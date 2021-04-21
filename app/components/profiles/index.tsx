@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
     Container,
     ListContainer,
@@ -18,17 +18,15 @@ import { TabView, SceneMap } from 'react-native-tab-view';
 import { ScrollView, Text } from 'react-native';
 import { ProfileListProps } from './profiles.type';
 import { Feather } from '@expo/vector-icons';
+import {
+    InitialState,
+    InitialText
+} from '../../screen/findGithubUsersAndCompanies/styles';
 
-const Profiles: React.FC<ProfileListProps> = ({ data, type }) => {
-    const FirstRoute = () =>
-        type === 'User' ? listProfiles('User') : <Text>Sem users</Text>;
+const Profiles: React.FC<ProfileListProps> = ({ data, userName }) => {
+    const FirstRoute = () => listProfiles('User');
 
-    const SecondRoute = () =>
-        type === 'Organization' ? (
-            listProfiles('Company')
-        ) : (
-            <Text>Sem organizações</Text>
-        );
+    const SecondRoute = () => listProfiles('Organization');
 
     const renderScene = SceneMap({
         first: FirstRoute,
@@ -36,21 +34,53 @@ const Profiles: React.FC<ProfileListProps> = ({ data, type }) => {
     });
 
     const [index, setIndex] = useState(0);
+    const dataUser = data?.users?.filter(
+        (user) => user?.type === 'Organization'
+    );
+    const dataUserOrg = data?.users?.filter((user) => user?.type === 'User');
 
     const [routes] = useState([
         {
             key: 'first',
-            title: `USERS (${type === 'User' ? data?.users?.length : 0})`
+            title: `USERS (${dataUserOrg?.length || 0})`
         },
         {
             key: 'second',
-            title: `COMPANIES (${
-                type === 'Organization' ? data?.users?.length : 0
-            })`
+            title: `COMPANIES (${dataUser?.length || 0})`
         }
     ]);
 
-    function listProfiles(type: string) {
+    function getUser(type: string) {
+        const dataUser = data?.users?.filter((user) => user?.type === type);
+
+        return (
+            <ScrollView>
+                {dataUser?.map((user) => (
+                    <ListContainer
+                        key={Math.random()}
+                        style={{
+                            borderBottomWidth: 1,
+                            borderBottomColor: '#D1D9E2'
+                        }}
+                    >
+                        <AvatarUsernameCompleteName>
+                            <Avatar source={{ uri: user?.avatar_url }} />
+                            <CompleteAndUsername>
+                                <UserName>{user?.login}</UserName>
+                                <CompleteName>{user?.name || ' '}</CompleteName>
+                            </CompleteAndUsername>
+                        </AvatarUsernameCompleteName>
+
+                        <ContribuitionsNumber>
+                            {user?.total}
+                        </ContribuitionsNumber>
+                    </ListContainer>
+                ))}
+            </ScrollView>
+        );
+    }
+
+    const listProfiles = useCallback((type: string) => {
         return (
             <>
                 {!data?.users?.length && (
@@ -68,76 +98,39 @@ const Profiles: React.FC<ProfileListProps> = ({ data, type }) => {
                         borderBottomColor: '#D1D9E2'
                     }}
                 >
-                    {type === 'User' && (
-                        <>
-                            <TextContainer>
-                                <Text style={{ color: '#192538' }}>USER</Text>
-                                <Feather name="chevron-down" />
-                            </TextContainer>
+                    <>
+                        <TextContainer>
+                            <Text style={{ color: '#192538' }}>
+                                {type === 'User' ? 'USER' : 'COMPANY'}
+                            </Text>
+                            <Feather name="chevron-down" />
+                        </TextContainer>
 
-                            <TextContainer>
-                                <Text style={{ color: '#8B929C' }}>
-                                    CONTRIBUITIONS
-                                </Text>
-                                <Feather name="chevron-down" />
-                            </TextContainer>
-                        </>
-                    )}
-                    {type === 'Company' && (
-                        <>
-                            <TextContainer>
-                                <Text style={{ color: '#192538' }}>
-                                    COMPANY
-                                </Text>
-                                <Feather name="chevron-down" />
-                            </TextContainer>
-
-                            <TextContainer>
-                                <Text style={{ color: '#8B929C' }}>
-                                    PEAOPLE
-                                </Text>
-                                <Feather name="chevron-down" />
-                            </TextContainer>
-                        </>
-                    )}
+                        <TextContainer>
+                            <Text style={{ color: '#8B929C' }}>
+                                {type === 'User' ? 'CONTRIBUITIONS' : 'PEAOPLE'}
+                            </Text>
+                            <Feather name="chevron-down" />
+                        </TextContainer>
+                    </>
                 </Titles>
 
-                <ScrollView>
-                    {data?.users?.map((user) => {
-                        return (
-                            <ListContainer
-                                key={Math.random()}
-                                style={{
-                                    borderBottomWidth: 1,
-                                    borderBottomColor: '#D1D9E2'
-                                }}
-                            >
-                                <AvatarUsernameCompleteName>
-                                    <Avatar
-                                        source={{ uri: user?.avatar_url }}
-                                    />
-                                    <CompleteAndUsername>
-                                        <UserName>{user?.login}</UserName>
-                                        <CompleteName>
-                                            {user?.name || ' '}
-                                        </CompleteName>
-                                    </CompleteAndUsername>
-                                </AvatarUsernameCompleteName>
-
-                                <ContribuitionsNumber>
-                                    {user?.total}
-                                </ContribuitionsNumber>
-                            </ListContainer>
-                        );
-                    })}
-                </ScrollView>
+                {getUser(type)}
             </>
         );
-    }
+    }, []);
 
     return (
         <Container>
-            {data?.users?.length !== 0 && (
+            {!data && userName === '' && (
+                <InitialState>
+                    <Feather name="search" size={55} color="#D1D9E2" />
+                    <InitialText>
+                        Enter a login, name or a company you are looking for.
+                    </InitialText>
+                </InitialState>
+            )}
+            {data && (
                 <TabView
                     style={{
                         paddingTop: 25,

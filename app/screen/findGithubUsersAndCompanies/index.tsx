@@ -27,9 +27,7 @@ const FindGithubUsersAndCompanies: React.FC = ({
         clearUsersList,
         usersAreLoading,
         dealingSearchUsers,
-        getUsersByType,
-        showMoreUsers,
-        testFlow
+        showMoreUsers
     } = useProfiles();
 
     return (
@@ -39,7 +37,6 @@ const FindGithubUsersAndCompanies: React.FC = ({
                     Search for{'\n'}Github Users
                 </SearchInputTitle>
                 <InputSearch
-                    // value={username}
                     isLoading={usersAreLoading}
                     onPress={() => {
                         if (dealingSearchUsers)
@@ -52,25 +49,21 @@ const FindGithubUsersAndCompanies: React.FC = ({
                 />
             </SearchInputLabel>
 
-            <InitialState>
-                <Feather name="search" size={55} color="#D1D9E2" />
-                <InitialText>
-                    Enter a login, name or a company you are looking for.
-                </InitialText>
-            </InitialState>
-
             {!usersAreLoading && (
-                <Profiles
-                    type={'User' || 'Organization'}
-                    data={
-                        getUsersByType
-                            ? getUsersByType({
-                                  type: 'User' && 'Organization'
-                              })
-                            : getUsersByType
-                    }
-                />
+                <Profiles userName={username} data={githubUsersProfiles} />
             )}
+            <Text
+                onPress={() => {
+                    if (showMoreUsers) showMoreUsers(username);
+                }}
+                style={{
+                    paddingTop: 20,
+                    paddingBottom: 20,
+                    color: '#D1D9E2'
+                }}
+            >
+                SHOW MORE
+            </Text>
         </Container>
     );
 };

@@ -13,7 +13,7 @@ export type DataProps = {
 
 export type ProfileListProps = {
     data?: DataProps;
-    type: 'User' | 'Organization';
+    userName?: string;
 };
 
 export type MainGithubUserProps = {

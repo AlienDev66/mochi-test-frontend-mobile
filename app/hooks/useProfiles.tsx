@@ -21,12 +21,10 @@ type SearchProps = {
 
 type ProfileContextProps = {
     githubUsersProfiles: DataProps;
-    getUsersByType?: (userType: UserTypeProps) => DataProps;
     dealingSearchUsers?: (handleOptions: SearchProps) => void;
     usersAreLoading: boolean;
     clearUsersList?: () => void;
     showMoreUsers?: (userName: string) => void;
-    testFlow?: () => void;
 };
 
 export const ProfilesContext = createContext<ProfileContextProps>({
@@ -40,10 +38,6 @@ export const ProfilesProvider: React.FC = ({ children }) => {
     );
 
     const [usersAreLoading, setUsersAreLoading] = useState(false);
-
-    function testFlow() {
-        console.log('shit');
-    }
 
     const clearUsersList = () =>
         setGithubUsersProfiles({
@@ -106,21 +100,6 @@ export const ProfilesProvider: React.FC = ({ children }) => {
         []
     );
 
-    const getUsersByType = useCallback(
-        ({ type }: UserTypeProps) => {
-            const usersFilters =
-                githubUsersProfiles?.users?.filter(
-                    (user) => user.type === type
-                ) || [];
-
-            return {
-                users: usersFilters,
-                total: githubUsersProfiles?.total
-            };
-        },
-        [githubUsersProfiles]
-    );
-
     const parseGithubUsers = useCallback((userResponse): UserProfileProps => {
         const { user, organization } = userResponse?.data;
 
@@ -156,20 +135,16 @@ export const ProfilesProvider: React.FC = ({ children }) => {
         () => ({
             githubUsersProfiles,
             dealingSearchUsers,
-            getUsersByType,
             usersAreLoading,
             clearUsersList,
-            showMoreUsers,
-            testFlow
+            showMoreUsers
         }),
         [
             githubUsersProfiles,
             dealingSearchUsers,
-            getUsersByType,
             usersAreLoading,
             clearUsersList,
-            showMoreUsers,
-            testFlow
+            showMoreUsers
         ]
     );
 
