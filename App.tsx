@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { ProfilesProvider } from './app/hooks/useProfiles';
 import FindGithubUsersAndCompanies from './app/screen/findGithubUsersAndCompanies';
 
 export default function App() {
     const [selectedTab, setSelectedTab] = useState(0);
     return (
-        <View style={styles.container}>
-            <FindGithubUsersAndCompanies />
-        </View>
+        <ProfilesProvider>
+            <View style={styles.container}>
+                <FindGithubUsersAndCompanies />
+            </View>
+        </ProfilesProvider>
     );
 }
 

@@ -26,6 +26,7 @@ type ProfileContextProps = {
     usersAreLoading: boolean;
     clearUsersList?: () => void;
     showMoreUsers?: (userName: string) => void;
+    testFlow?: () => void;
 };
 
 export const ProfilesContext = createContext<ProfileContextProps>({
@@ -34,12 +35,15 @@ export const ProfilesContext = createContext<ProfileContextProps>({
 });
 
 export const ProfilesProvider: React.FC = ({ children }) => {
-    const [
-        githubUsersProfiles,
-        setGithubUsersProfiles
-    ] = useState<DataProps | null>(null);
+    const [githubUsersProfiles, setGithubUsersProfiles] = useState<DataProps>(
+        null as any
+    );
 
     const [usersAreLoading, setUsersAreLoading] = useState(false);
+
+    function testFlow() {
+        console.log('shit');
+    }
 
     const clearUsersList = () =>
         setGithubUsersProfiles({
@@ -63,7 +67,6 @@ export const ProfilesProvider: React.FC = ({ children }) => {
                 const { data } = await api?.get('/search/users', {
                     params: { q: user?.login, per_page: page }
                 });
-
                 return data;
             } catch (error) {
                 console.error(error?.message);
@@ -81,7 +84,7 @@ export const ProfilesProvider: React.FC = ({ children }) => {
                 const users = await searchGithubUsers({ login }, page);
 
                 const usersProfiles = await Promise.all(
-                    users?.items?.map(async ({ login }) => {
+                    users?.items?.map(async ({ login }: { login: string }) => {
                         const userProfile = await getGithubUserProfile({
                             login
                         });
@@ -119,7 +122,7 @@ export const ProfilesProvider: React.FC = ({ children }) => {
     );
 
     const parseGithubUsers = useCallback((userResponse): UserProfileProps => {
-        const { user, organization } = userResponse.data;
+        const { user, organization } = userResponse?.data;
 
         const userParsed = {
             type: user ? 'User' : 'Organization',
@@ -156,7 +159,8 @@ export const ProfilesProvider: React.FC = ({ children }) => {
             getUsersByType,
             usersAreLoading,
             clearUsersList,
-            showMoreUsers
+            showMoreUsers,
+            testFlow
         }),
         [
             githubUsersProfiles,
@@ -164,7 +168,8 @@ export const ProfilesProvider: React.FC = ({ children }) => {
             getUsersByType,
             usersAreLoading,
             clearUsersList,
-            showMoreUsers
+            showMoreUsers,
+            testFlow
         ]
     );
 

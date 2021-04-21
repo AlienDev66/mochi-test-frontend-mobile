@@ -19,10 +19,16 @@ import { ScrollView, Text } from 'react-native';
 import { ProfileListProps } from './profiles.type';
 import { Feather } from '@expo/vector-icons';
 
-const Profiles: React.FC<ProfileListProps> = ({ data }) => {
-    const FirstRoute = () => listProfiles('User');
+const Profiles: React.FC<ProfileListProps> = ({ data, type }) => {
+    const FirstRoute = () =>
+        type === 'User' ? listProfiles('User') : <Text>Sem users</Text>;
 
-    const SecondRoute = () => listProfiles('Company');
+    const SecondRoute = () =>
+        type === 'Organization' ? (
+            listProfiles('Company')
+        ) : (
+            <Text>Sem organizações</Text>
+        );
 
     const renderScene = SceneMap({
         first: FirstRoute,
@@ -30,9 +36,18 @@ const Profiles: React.FC<ProfileListProps> = ({ data }) => {
     });
 
     const [index, setIndex] = useState(0);
+
     const [routes] = useState([
-        { key: 'first', title: `USERS (${data?.users?.length || 0})` },
-        { key: 'second', title: `COMPANIES (${data?.users?.length || 0})` }
+        {
+            key: 'first',
+            title: `USERS (${type === 'User' ? data?.users?.length : 0})`
+        },
+        {
+            key: 'second',
+            title: `COMPANIES (${
+                type === 'Organization' ? data?.users?.length : 0
+            })`
+        }
     ]);
 
     function listProfiles(type: string) {
@@ -88,27 +103,32 @@ const Profiles: React.FC<ProfileListProps> = ({ data }) => {
                 </Titles>
 
                 <ScrollView>
-                    {data?.users?.map((user, i) => {
-                        <ListContainer
-                            style={{
-                                borderBottomWidth: 1,
-                                borderBottomColor: '#D1D9E2'
-                            }}
-                        >
-                            <AvatarUsernameCompleteName>
-                                <Avatar source={user?.avatar_url} />
-                                <CompleteAndUsername>
-                                    <UserName>{user?.login}</UserName>
-                                    <CompleteName>
-                                        {user?.name || ' '}
-                                    </CompleteName>
-                                </CompleteAndUsername>
-                            </AvatarUsernameCompleteName>
+                    {data?.users?.map((user) => {
+                        return (
+                            <ListContainer
+                                key={Math.random()}
+                                style={{
+                                    borderBottomWidth: 1,
+                                    borderBottomColor: '#D1D9E2'
+                                }}
+                            >
+                                <AvatarUsernameCompleteName>
+                                    <Avatar
+                                        source={{ uri: user?.avatar_url }}
+                                    />
+                                    <CompleteAndUsername>
+                                        <UserName>{user?.login}</UserName>
+                                        <CompleteName>
+                                            {user?.name || ' '}
+                                        </CompleteName>
+                                    </CompleteAndUsername>
+                                </AvatarUsernameCompleteName>
 
-                            <ContribuitionsNumber>
-                                {user?.total}
-                            </ContribuitionsNumber>
-                        </ListContainer>;
+                                <ContribuitionsNumber>
+                                    {user?.total}
+                                </ContribuitionsNumber>
+                            </ListContainer>
+                        );
                     })}
                 </ScrollView>
             </>
@@ -117,18 +137,20 @@ const Profiles: React.FC<ProfileListProps> = ({ data }) => {
 
     return (
         <Container>
-            <TabView
-                style={{
-                    paddingTop: 25,
-                    width: 300
-                }}
-                sceneContainerStyle={{
-                    alignItems: 'center'
-                }}
-                navigationState={{ index, routes }}
-                renderScene={renderScene}
-                onIndexChange={setIndex}
-            />
+            {data?.users?.length !== 0 && (
+                <TabView
+                    style={{
+                        paddingTop: 25,
+                        width: 300
+                    }}
+                    sceneContainerStyle={{
+                        alignItems: 'center'
+                    }}
+                    navigationState={{ index, routes }}
+                    renderScene={renderScene}
+                    onIndexChange={setIndex}
+                />
+            )}
         </Container>
     );
 };
