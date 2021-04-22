@@ -1,6 +1,6 @@
 import { MainGithubUserProps } from './profiles.type';
 
-export const organizationSchemaFields = `
+export const organizationSchema = `
   name
   avatarUrl
   login
@@ -9,7 +9,7 @@ export const organizationSchemaFields = `
   }
 `;
 
-export const userSchemaFields = `
+export const userSchema = `
   name
   avatarUrl
   login
@@ -23,17 +23,17 @@ export const userSchemaFields = `
 export const getFullGithubUserSchema = ({
     login
 }: MainGithubUserProps): string => {
-    const userOrganizationSchema = `
+    const organizationSchemaUser = `
   query {
     organization(login: "${login}") {
-      ${organizationSchemaFields}
+      ${organizationSchema}
     }
 
     user(login: "${login}") {
-      ${userSchemaFields}
+      ${userSchema}
     }
   }
   `;
 
-    return userOrganizationSchema;
+    return organizationSchemaUser;
 };

@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const TOKEN_GITHUB_API = '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';
+const GITHUB_TOKEN_API = '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';
 
 const headers = {
-    Authorization: 'bearer ' + TOKEN_GITHUB_API
+    Authorization: 'bearer ' + GITHUB_TOKEN_API
 };
 
 const api = axios.create({ headers, baseURL: 'https://api.github.com' });

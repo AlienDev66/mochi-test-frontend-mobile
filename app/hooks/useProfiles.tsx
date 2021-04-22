@@ -9,8 +9,7 @@ import api from '../../services/api';
 import {
     DataProps,
     MainGithubUserProps,
-    UserProfileProps,
-    UserTypeProps
+    UserProfileProps
 } from '../components/profiles/profiles.type';
 import { getFullGithubUserSchema } from '../components/profiles/schema';
 
@@ -23,7 +22,6 @@ type ProfileContextProps = {
     githubUsersProfiles: DataProps;
     dealingSearchUsers?: (handleOptions: SearchProps) => void;
     usersAreLoading: boolean;
-    clearUsersList?: () => void;
     showMoreUsers?: (userName: string) => void;
 };
 
@@ -38,12 +36,6 @@ export const ProfilesProvider: React.FC = ({ children }) => {
     );
 
     const [usersAreLoading, setUsersAreLoading] = useState(false);
-
-    const clearUsersList = () =>
-        setGithubUsersProfiles({
-            users: [],
-            total: 0
-        });
 
     const showMoreUsers = useCallback(
         (userName: string) => {
@@ -136,14 +128,12 @@ export const ProfilesProvider: React.FC = ({ children }) => {
             githubUsersProfiles,
             dealingSearchUsers,
             usersAreLoading,
-            clearUsersList,
             showMoreUsers
         }),
         [
             githubUsersProfiles,
             dealingSearchUsers,
             usersAreLoading,
-            clearUsersList,
             showMoreUsers
         ]
     );

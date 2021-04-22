@@ -9,18 +9,13 @@ const InputSearch: React.FC<InputSearchProps> = ({
     isLoading,
     onPress,
     ...rest
-}) => {
-    return (
-        <Container>
-            <SearchInput {...rest} placeholder="Type a user name here" />
-            <SearchButton disabled={isLoading} onPress={onPress}>
-                {isLoading && <SkypeIndicator size={15} color="#ffff" />}
-                {!isLoading && (
-                    <Feather name="search" size={15} color="#ffff" />
-                )}
-            </SearchButton>
-        </Container>
-    );
-};
-
+}) => (
+    <Container>
+        <SearchInput {...rest} placeholder="Type a user name here" />
+        <SearchButton disabled={isLoading} onPress={onPress}>
+            {isLoading && <SkypeIndicator size={15} color="#ffff" />}
+            {!isLoading && <Feather name="search" size={15} color="#ffff" />}
+        </SearchButton>
+    </Container>
+);
 export default InputSearch;

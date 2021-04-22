@@ -17,7 +17,6 @@ const FindGithubUsersAndCompanies: React.FC = ({
 
     const {
         githubUsersProfiles,
-        clearUsersList,
         usersAreLoading,
         dealingSearchUsers,
         showMoreUsers

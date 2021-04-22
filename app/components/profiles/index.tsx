@@ -24,6 +24,7 @@ import {
 } from '../../screen/findGithubUsersAndCompanies/styles';
 
 const Profiles: React.FC<ProfileListProps> = ({ data, userName }) => {
+    const [index, setIndex] = useState(0);
     const FirstRoute = () => listProfiles('User');
 
     const SecondRoute = () => listProfiles('Organization');
@@ -33,7 +34,6 @@ const Profiles: React.FC<ProfileListProps> = ({ data, userName }) => {
         second: SecondRoute
     });
 
-    const [index, setIndex] = useState(0);
     const dataUser = data?.users?.filter(
         (user) => user?.type === 'Organization'
     );
