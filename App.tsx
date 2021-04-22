@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { ProfilesProvider } from './app/hooks/useProfiles';
 import FindGithubUsersAndCompanies from './app/screen/findGithubUsersAndCompanies';
 
 export default function App() {
-    const [selectedTab, setSelectedTab] = useState(0);
     return (
         <ProfilesProvider>
             <View style={styles.container}>

@@ -8,38 +8,12 @@
         "eject": "expo eject",
         "test": "jest"
     },
-    "jest": {
-        "preset": "react-native",
-        "transform": {
-            "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js",
-            "^.+\\.tsx?$": "ts-jest"
-        },
-        "globals": {
-            "ts-jest": {
-                "tsConfigFile": "tsconfig.jest.json"
-            }
-        },
-        "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-        "moduleFileExtensions": [
-            "ts",
-            "tsx",
-            "js",
-            "jsx",
-            "json",
-            "node"
-        ],
-        "modulePaths": [
-            "<rootDir>"
-        ],
-        "setupFiles": [
-            "./tests/setup.ts"
-        ]
-    },
     "dependencies": {
         "@expo/vector-icons": "^12.0.4",
         "axios": "^0.21.1",
         "expo": "~41.0.0",
         "expo-status-bar": "~1.0.4",
+        "native-base": "^2.15.2",
         "react": "16.13.1",
         "react-dom": "^17.0.2",
         "react-native": "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz",
@@ -53,7 +27,6 @@
         "@babel/core": "^7.9.0",
         "@types/enzyme": "^3.10.8",
         "@types/enzyme-adapter-react-16": "^1.0.6",
-        "@types/jest": "^26.0.22",
         "@types/react": "~16.9.35",
         "@types/react-native": "~0.63.2",
         "@types/react-test-renderer": "^17.0.1",
@@ -65,11 +38,8 @@
         "eslint-config-airbnb": "^18.2.1",
         "eslint-config-prettier": "^8.2.0",
         "eslint-plugin-prettier": "^3.4.0",
-        "jest-expo": "^41.0.0",
-        "jest-fetch-mock": "^3.0.3",
         "prettier": "^2.2.1",
         "react-test-renderer": "^17.0.2",
-        "ts-jest": "^26.5.5",
         "typescript": "~4.0.0"
     },
     "private": true
