@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const TOKEN_GITHUB_API = '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';
+const TOKEN_GITHUB_API = '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';
 
 const headers = {
     Authorization: 'bearer ' + TOKEN_GITHUB_API
