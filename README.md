@@ -19,3 +19,19 @@
   - [❓ Questions](#-questions)
 - [Contributors](#contributors)
 - [LICENSE](#license)
+
+## :truck: Necessary resources
+
+To run this project you must have installed the following:
+
+<div align="center">
+<a href="https://nodejs.org/en/">
+  <img
+    height="80"
+    width="80"
+    alt="goat"
+    src="https://codingfinder.com/wp-content/uploads/2019/12/nodejslogo.png"
+  />
+</a>
+
+<div>
