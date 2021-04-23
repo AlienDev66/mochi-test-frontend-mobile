@@ -1,6 +1,7 @@
 const { defaults } = require('jest-config');
 
 module.exports = {
+    preset: 'jest-expo',
     testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
 
     transform: {
