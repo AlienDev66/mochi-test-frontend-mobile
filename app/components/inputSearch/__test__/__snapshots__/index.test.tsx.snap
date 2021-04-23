@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<InputSearch /> has 3 child 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "borderColor": "#acb7c5",
+        "borderRadius": 5,
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "height": 50,
+        "justifyContent": "space-between",
+        "marginLeft": 25,
+        "marginRight": 25,
+        "width": 300,
+      },
+    ]
+  }
+>
+  <TextInput
+    allowFontScaling={true}
+    onChangeText={[Function]}
+    placeholder="Type a user name here"
+    rejectResponderTermination={true}
+    style={
+      Array [
+        Object {
+          "backgroundColor": "transparent",
+          "color": "black",
+          "height": 50,
+          "paddingBottom": 10,
+          "paddingLeft": 10,
+          "paddingRight": 10,
+          "paddingTop": 10,
+          "width": "85%",
+        },
+      ]
+    }
+    underlineColorAndroid="transparent"
+  />
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#c200b9",
+        "borderRadius": 2,
+        "height": 32,
+        "justifyContent": "center",
+        "marginRight": 5,
+        "opacity": 1,
+        "width": 32,
+      }
+    }
+  >
+    <Text />
+  </View>
+</View>
+`;
