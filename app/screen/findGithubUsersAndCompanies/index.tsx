@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { ReactNode } from 'react';
 import InputSearch from '../../components/inputSearch';
 import { Container, SearchInputTitle, SearchInputLabel } from './styles';
@@ -6,13 +6,7 @@ import Profiles from '../../components/profiles';
 import { Text } from 'react-native';
 import { useProfiles } from '../../hooks/useProfiles';
 
-interface FindGithubUsersAndCompaniesProps {
-    children?: ReactNode;
-}
-
-const FindGithubUsersAndCompanies: React.FC = ({
-    children
-}: FindGithubUsersAndCompaniesProps) => {
+const FindGithubUsersAndCompanies: FC = () => {
     const [username, setUsername] = useState<string>('');
 
     const {
