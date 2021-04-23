@@ -18,5 +18,4 @@ const InputSearch: React.FC<InputSearchProps> = ({
         </SearchButton>
     </Container>
 );
-
 export default InputSearch;

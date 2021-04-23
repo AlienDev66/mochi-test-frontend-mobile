@@ -28,9 +28,8 @@ const FindGithubUsersAndCompanies: FC = () => {
                         if (dealingSearchUsers)
                             dealingSearchUsers({ login: username });
                     }}
-                    onChangeText={(username: any) => {
-                        console.log(username);
-                        setUsername(username);
+                    onChangeText={(user: any) => {
+                        setUsername(user);
                     }}
                 />
             </SearchInputLabel>

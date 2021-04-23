@@ -9,8 +9,7 @@ import api from '../../services/api';
 import {
     DataProps,
     MainGithubUserProps,
-    UserProfileProps,
-    UserTypeProps
+    UserProfileProps
 } from '../components/profiles/profiles.type';
 import { getFullGithubUserSchema } from '../components/profiles/schema';
 
